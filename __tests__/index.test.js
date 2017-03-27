@@ -5,9 +5,7 @@ import App from '../pages/index';
 
 describe('Index with Enzyme', () => {
     it('App shows "Hello world!"', () => {
-        const app = shallow(
-            <App />
-        );
+        const app = shallow(<App />);
         expect(app.find('p').text()).toEqual('Hello World!');
     });
 });

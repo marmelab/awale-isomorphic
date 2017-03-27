@@ -8,4 +8,4 @@ test:
 	node_modules/.bin/jest
 
 lint:
-	node_modules/.bin/eslint pages/
+	node_modules/.bin/eslint pages/ __tests__/
