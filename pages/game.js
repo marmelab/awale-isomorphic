@@ -1,3 +1,9 @@
+import Header from '../src/components/header';
+
 export default () => (
-    <p>Game Page</p>
+    <div>
+        <Header />
+
+        <p>Game Page</p>
+    </div>
 );
