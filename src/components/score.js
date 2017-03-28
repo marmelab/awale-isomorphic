@@ -9,11 +9,11 @@ export default class Score extends Component {
         return (
             <div>
                 <p className="turnLabel" />
-                <section className="score" data-bottom={this.props.score[1]} data-top={this.props.score[1]} />
+                <div className="score score-top">{this.props.score[1]}</div>
+                <div className="score score-bottom">{this.props.score[0]}</div>
 
                 <style jsx>{`
-                    .score:before,
-                    .score:after {
+                    .score {
                         border: 10px solid white;
                         border-radius: 85px;
                         color: white;
@@ -25,15 +25,13 @@ export default class Score extends Component {
                         text-align: center;
                         width: 150px;
                     }
-                    .score:before {
+                    .score-top {
                         border-color: #34495e;
-                        content: attr(data-top);
                         left: 0;
                         margin-left: -190px
                     }
-                    .score:after {
+                    .score-bottom {
                         border-color: #9b59b6;
-                        content: attr(data-bottom);
                         right: 0;
                         margin-right: -190px
                     }
