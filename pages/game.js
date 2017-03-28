@@ -22,7 +22,7 @@ export default class Game extends Component {
         return createGame([createPlayer(0), createPlayer(1, true)]);
     }
 
-    pickPebble = (position) => {
+    handlePickPebble = (position) => {
         console.log('not implemented', position);
     }
 
@@ -36,7 +36,7 @@ export default class Game extends Component {
                 <Board
                     board={game.board}
                     currentIndexPlayer={game.currentIndexPlayer}
-                    pickPebble={this.pickPebble}
+                    pickPebble={this.handlePickPebble}
                     canPlay={canPlay}
                 />
 
