@@ -58,6 +58,11 @@ export default class Board extends Component {
                   .board[data-turn='bottom'] .pit:nth-child(-n+6) {
                         background: #b94a00;
                   }
+
+                  .board[data-turn='top'] .pit:nth-child(n+7),
+                  .board[data-turn='bottom'] .pit:nth-child(-n+6) {
+                        color: #f39c12;
+                  }
                 `}</style>
             </div>
         );
