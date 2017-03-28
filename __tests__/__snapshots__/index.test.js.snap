@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Menu Layout with Snapshot Testing App shows Menu layout 1`] = `
+exports[`Title should match with snapshot 1`] = `
 <div
   data-jsx={3805639002}
 >
