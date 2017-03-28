@@ -22,7 +22,7 @@ export default class Game extends Component {
     }
 
     pickPebble = (position) => {
-        console.warn("not implemented", position);
+        console.log("not implemented", position);
     }
 
     render() {

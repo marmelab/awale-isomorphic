@@ -23,14 +23,15 @@ export default class Board extends Component {
         const topBoard = this.props.board.slice(halfSize, size).reverse();
         const bottomBoard = this.props.board.slice(0, halfSize);
 
+        const turn = this.props.currentIndexPlayer === 0 ? 'bottom' : 'top';
+
         return (
-            <div className="board">
+            <div className="board" data-turn={turn}>
                 {topBoard.map((pit, i) =>
                     <PitButton
                         onPress={this.pickPebble}
                         pitValue={pit}
                         pitIndex={size - 1 - i}
-                        enabled={this.props.currentIndexPlayer === 1 && this.props.canPlay}
                         key={`topBoard-${i}`}
                     />
                 )}
@@ -39,7 +40,6 @@ export default class Board extends Component {
                         onPress={this.pickPebble}
                         pitValue={pit}
                         pitIndex={i}
-                        enabled={this.props.currentIndexPlayer === 0}
                         key={`bottomBoard-${i}`}
                     />
                 )}
@@ -52,10 +52,7 @@ export default class Board extends Component {
                       flex-wrap: wrap;
                       height: 100%;
                       justify-content: space-around;
-                      margin: 0 auto;
                       padding: 20px;
-                      position: relative;
-                      width: 100%;
                   }
                 `}</style>
             </div>

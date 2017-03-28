@@ -6,6 +6,9 @@ export default () => (
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Awale</title>
         <style>{`
+          * {
+              box-sizing: border-box;
+          }
           body {
               background: #1abc9c;
               display: flex;

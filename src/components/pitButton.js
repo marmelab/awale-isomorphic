@@ -5,7 +5,6 @@ export default class PitButton extends Component {
         onPress: PropTypes.func.isRequired,
         pitValue: PropTypes.number.isRequired,
         pitIndex: PropTypes.number.isRequired,
-        enabled: PropTypes.bool,
     }
 
     static defaultProps = {
@@ -18,9 +17,23 @@ export default class PitButton extends Component {
 
     render() {
         return (
-            !this.props.enabled ?
-                <div className="pit pit-disabled">{this.props.pitValue}</div> :
-                <div onPress={this.pickPebble} className="pit">{this.props.pitValue}</div>
+            <button onClick={this.pickPebble} className="pit">
+                {this.props.pitValue}
+
+                <style jsx>{`
+                  .pit {
+                      border: none;
+                      outline: none;
+                      background: #d35400;
+                      border-radius: 50%;
+                      cursor: pointer;
+                      height: 40%;
+                      margin: 0 8px;
+                      padding: 10px;
+                      width: 14%;
+                  }
+                `}</style>
+            </button>
         );
     }
 }
