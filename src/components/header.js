@@ -13,6 +13,7 @@ export default () => (
               background: #1abc9c;
               display: flex;
               align-items: center;
+              justify-content: center;
               font-family: Segoe UI,Helvetica Neue,Helvetica,Arial,sans-serif;
           }
         `}</style>
