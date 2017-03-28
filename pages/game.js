@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import Header from '../src/components/header';
 import Board from '../src/components/board';
+import Score from '../src/components/score';
 
 import {
     create as createGame,
@@ -38,6 +39,8 @@ export default class Game extends Component {
                     pickPebble={this.pickPebble}
                     canPlay={canPlay}
                 />
+
+                <Score score={game.score} />
 
                 <style jsx>{`
                   .game {
