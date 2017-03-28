@@ -13,12 +13,12 @@ export default class Game extends Component {
         super(props);
 
         this.state = {
-            game: this.createGameModel(),
+            game: this.startGame(),
             canPlay: true,
         };
     }
 
-    createGameModel() {
+    startGame() {
         return createGame([createPlayer(0), createPlayer(1, true)]);
     }
 
