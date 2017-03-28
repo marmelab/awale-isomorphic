@@ -9,11 +9,17 @@ export default () => (
           * {
               box-sizing: border-box;
           }
+          html {
+              height:100%;
+              width:100%;
+              display:flex;
+          }
           body {
               background: #1abc9c;
               display: flex;
               align-items: center;
               justify-content: center;
+              margin:auto;
               font-family: Segoe UI,Helvetica Neue,Helvetica,Arial,sans-serif;
           }
         `}</style>
