@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import Header from '../src/components/header';
-import Board from '../src/components/board'
+import Board from '../src/components/board';
 
 import {
     create as createGame,
@@ -12,25 +12,42 @@ export default class Game extends Component {
         super(props);
 
         this.state = {
-            game: this.getGameModel()
+            game: this.createGameModel(),
+            canPlay: true,
         };
     }
 
-    getGameModel() {
+    createGameModel() {
         return createGame([createPlayer(0), createPlayer(1, true)]);
     }
 
+    pickPebble = (position) => {
+        console.warn("not implemented", position);
+    }
+
     render() {
-        const { game } = this.state;
+        const { game, canPlay } = this.state;
 
         return (
-            <div>
+            <div className="game">
                 <Header />
 
                 <Board
                     board={game.board}
+                    currentIndexPlayer={game.currentIndexPlayer}
+                    pickPebble={this.pickPebble}
+                    canPlay={canPlay}
                 />
+
+                <style jsx>{`
+                  .game {
+                      height: 270px;
+                      margin: 0 auto;
+                      position: relative;
+                      width: 720px
+                  }
+                `}</style>
             </div>
-        )
+        );
     }
 }
