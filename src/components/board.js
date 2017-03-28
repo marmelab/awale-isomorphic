@@ -54,6 +54,27 @@ export default class Board extends Component {
                       justify-content: space-around;
                       padding: 20px;
                   }
+                  .board:before {
+                      background: #d35400;
+                      border-radius: 0 0 20px 20px;
+                      content: '';
+                      height: 20px;
+                      position: absolute;
+                      bottom: 0;
+                      width: 100%;
+                  }
+                  .board:after {
+                      background: black;
+                      content: '';
+                      height: 100%;
+                      opacity: 0.3;
+                      position: absolute;
+                      top: 0;
+                      transform: translateY(20px);
+                      width: calc(100% - 20px);
+                      z-index: -1;
+                  }
+
                   .board[data-turn='top'] .pit:nth-child(n+7),
                   .board[data-turn='bottom'] .pit:nth-child(-n+6) {
                         background: #b94a00;
