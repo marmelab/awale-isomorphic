@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import Header from '../src/components/header';
 import Board from '../src/components/board';
 import Score from '../src/components/score';
@@ -23,7 +23,7 @@ export default class Game extends Component {
     }
 
     pickPebble = (position) => {
-        console.log("not implemented", position);
+        console.log('not implemented', position);
     }
 
     render() {
