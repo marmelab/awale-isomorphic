@@ -11,7 +11,7 @@ export default class Score extends Component {
                 <p className="turnLabel" />
                 <section className="score" data-bottom={this.props.score[1]} data-top={this.props.score[1]} />
 
-                <style jsx global>{`
+                <style jsx>{`
                     .score:before,
                     .score:after {
                         border: 10px solid white;

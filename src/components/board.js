@@ -23,10 +23,10 @@ export default class Board extends Component {
         const topBoard = this.props.board.slice(halfSize, size).reverse();
         const bottomBoard = this.props.board.slice(0, halfSize);
 
-        const turn = this.props.currentIndexPlayer === 0 ? 'bottom' : 'top';
+        const turn = this.props.currentIndexPlayer === 0 ? 'pit-bottom_color' : 'pit-top_color';
 
         return (
-            <div className="board" data-turn={turn}>
+            <div className={`board ${turn}`}>
                 {topBoard.map((pit, i) =>
                     <PitButton
                         onPress={this.pickPebble}
@@ -75,13 +75,13 @@ export default class Board extends Component {
                       z-index: -1;
                   }
 
-                  .board[data-turn='top'] .pit:nth-child(n+7),
-                  .board[data-turn='bottom'] .pit:nth-child(-n+6) {
+                  .pit-top_color .pit:nth-child(n+7),
+                  .pit-bottom_color .pit:nth-child(-n+6) {
                         background: #b94a00;
                   }
 
-                  .board[data-turn='top'] .pit:nth-child(n+7),
-                  .board[data-turn='bottom'] .pit:nth-child(-n+6) {
+                  .pit-top_color .pit:nth-child(n+7),
+                  .pit-bottom_color .pit:nth-child(-n+6) {
                         color: #f39c12;
                   }
                 `}</style>
