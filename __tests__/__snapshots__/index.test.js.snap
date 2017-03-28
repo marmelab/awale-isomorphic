@@ -1,7 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Index  with Snapshot Testing App shows "Hello world!" 1`] = `
-<p>
-  Hello World!
-</p>
+exports[`Title should match with snapshot 1`] = `
+<div
+  data-jsx={3805639002}
+>
+  <nav
+    data-jsx={3805639002}
+  >
+    <h1
+      data-jsx={3805639002}
+    >
+      Awale
+    </h1>
+    <ul
+      data-jsx={3805639002}
+    >
+      <li
+        data-jsx={3805639002}
+      >
+        <a
+          data-jsx={3805639002}
+          href="/game"
+          onClick={[Function]}
+        >
+          Solo
+        </a>
+      </li>
+      <li
+        data-jsx={3805639002}
+      >
+        <a
+          data-jsx={3805639002}
+          href="/game"
+          onClick={[Function]}
+        >
+          With a friend
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
 `;

@@ -3,15 +3,18 @@ import { shallow } from 'enzyme';
 import renderer from 'react-test-renderer';
 import App from '../pages/index';
 
-describe('Index with Enzyme', () => {
-    it('App shows "Hello world!"', () => {
+describe('Title', () => {
+    it('should contain the word "Awale"', () => {
         const app = shallow(<App />);
-        expect(app.find('p').text()).toEqual('Hello World!');
+        expect(app.find('h1').text()).toEqual('Awale');
     });
-});
 
-describe('Index  with Snapshot Testing', () => {
-    it('App shows "Hello world!"', () => {
+    it('should contain two links', () => {
+        const app = shallow(<App />);
+        expect(app.find('a').length).toEqual(2);
+    });
+
+    it('should match with snapshot', () => {
         const component = renderer.create(<App />);
         const tree = component.toJSON();
         expect(tree).toMatchSnapshot();
