@@ -44,7 +44,7 @@ export default class Board extends Component {
                     />
                 )}
 
-                <style jsx>{`
+                <style jsx global>{`
                   .board {
                       background: #f39c12;
                       border-radius: 5px 5px 21px 21px;
@@ -53,6 +53,10 @@ export default class Board extends Component {
                       height: 100%;
                       justify-content: space-around;
                       padding: 20px;
+                  }
+                  .board[data-turn='top'] .pit:nth-child(n+7),
+                  .board[data-turn='bottom'] .pit:nth-child(-n+6) {
+                        background: #b94a00;
                   }
                 `}</style>
             </div>

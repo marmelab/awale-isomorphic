@@ -25,6 +25,8 @@ export default class PitButton extends Component {
                       border: none;
                       outline: none;
                       background: #d35400;
+                      color: #f1c40f;
+                      font-size: xx-large;
                       border-radius: 50%;
                       cursor: pointer;
                       height: 40%;
