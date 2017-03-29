@@ -19,7 +19,6 @@ export default () => (
               font-size: 60px;
               height: 100%;
               justify-content: center;
-              position: fixed;
               text-align: center;
               width: 100%;
           }

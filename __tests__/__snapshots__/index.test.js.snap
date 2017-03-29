@@ -2,24 +2,24 @@
 
 exports[`Title should match with snapshot 1`] = `
 <div
-  data-jsx={3805639002}
+  data-jsx={2586136926}
 >
   <nav
-    data-jsx={3805639002}
+    data-jsx={2586136926}
   >
     <h1
-      data-jsx={3805639002}
+      data-jsx={2586136926}
     >
       Awale
     </h1>
     <ul
-      data-jsx={3805639002}
+      data-jsx={2586136926}
     >
       <li
-        data-jsx={3805639002}
+        data-jsx={2586136926}
       >
         <a
-          data-jsx={3805639002}
+          data-jsx={2586136926}
           href="/game"
           onClick={[Function]}
         >
@@ -27,10 +27,10 @@ exports[`Title should match with snapshot 1`] = `
         </a>
       </li>
       <li
-        data-jsx={3805639002}
+        data-jsx={2586136926}
       >
         <a
-          data-jsx={3805639002}
+          data-jsx={2586136926}
           href="/game"
           onClick={[Function]}
         >
