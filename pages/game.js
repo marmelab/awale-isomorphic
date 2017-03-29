@@ -43,9 +43,9 @@ export default class Game extends Component {
         }
     }
 
-     showGameStatus = (gameState) => {
-
-     }
+    showGameStatus = (gameState) => {
+        console.log('not implemented', gameState)
+    }
 
     render() {
         const { game, canPlay } = this.state;
@@ -63,26 +63,12 @@ export default class Game extends Component {
 
                 <Score score={game.score} />
 
-                <div className="game-over">
-                    Game Over
-                </div>
-
                 <style jsx>{`
                   .game {
                       height: 270px;
                       margin: 0 auto;
                       position: relative;
                       width: 720px
-                  }
-                  .game-over {
-                      background: inherit;
-                      border-radius: 0;
-                      color: white;
-                      font-size: 56px;
-                      height: 100%;
-                      position: absolute;
-                      top: 50%;
-                      left: 50%;
                   }
                 `}</style>
             </div>
