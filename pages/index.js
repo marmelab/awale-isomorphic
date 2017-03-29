@@ -1,3 +1,4 @@
+import React from 'react';
 import Link from 'next/link';
 import Header from '../src/components/header';
 
@@ -8,8 +9,8 @@ export default () => (
         <nav>
             <h1>Awale</h1>
             <ul>
-                <li><Link href='/game'><a>Solo</a></Link></li>
-                <li><Link href='/game'><a>With a friend</a></Link></li>
+                <li><Link href="/game"><a>Solo</a></Link></li>
+                <li><Link href="/game"><a>With a friend</a></Link></li>
             </ul>
         </nav>
         <style jsx>{`

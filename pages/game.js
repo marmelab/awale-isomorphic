@@ -44,7 +44,7 @@ export default class Game extends Component {
     }
 
     showGameStatus = (gameState) => {
-        console.log('not implemented', gameState)
+        console.log('not implemented', gameState);
     }
 
     render() {
