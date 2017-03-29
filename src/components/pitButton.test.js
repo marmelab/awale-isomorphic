@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import sinon from 'sinon';
 import PitButton from './pitButton';
 
 describe('<PitButton />', () => {
@@ -23,5 +24,31 @@ describe('<PitButton />', () => {
                 pitIndex={0}
             />);
         expect(pitButton.find('button').text()).toMatch('4');
+    });
+
+    it('should onPress return 0 (PitIndex)', () => {
+        const onButtonClick = sinon.spy();
+        const pitButton = shallow(
+            <PitButton
+                onPress={onButtonClick}
+                pitValue={4}
+                pitIndex={0}
+            />);
+        pitButton.find('button').simulate('click');
+        expect(onButtonClick.calledOnce).toEqual(true);
+        expect(onButtonClick.args[0][0]).toEqual(0);
+    });
+
+    it('should onPress return 6 (PitIndex)', () => {
+        const onButtonClick = sinon.spy();
+        const pitButton = shallow(
+            <PitButton
+                onPress={onButtonClick}
+                pitValue={4}
+                pitIndex={6}
+            />);
+        pitButton.find('button').simulate('click');
+        expect(onButtonClick.calledOnce).toEqual(true);
+        expect(onButtonClick.args[0][0]).toEqual(6);
     });
 });
