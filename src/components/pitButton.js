@@ -1,8 +1,10 @@
 import React, { PropTypes, Component } from 'react';
+import withRedux from 'next-redux-wrapper';
 
-export default class PitButton extends Component {
+import { initStore } from '../reducers/game';
+
+class PitButton extends Component {
     static propTypes = {
-        onPress: PropTypes.func.isRequired,
         pitValue: PropTypes.number.isRequired,
         pitIndex: PropTypes.number.isRequired,
     }
@@ -12,10 +14,11 @@ export default class PitButton extends Component {
     }
 
     pickPebble = () => {
-        this.props.onPress(this.props.pitIndex);
+        console.log(this.props.pitIndex);
     }
 
     render() {
+        console.log(this.props);
         return (
             <button onClick={this.pickPebble} className="pit">
                 {this.props.pitValue}
@@ -39,3 +42,10 @@ export default class PitButton extends Component {
         );
     }
 }
+
+const connect = state => ({
+    pitValue: state.position,
+    pitIndex: state.index,
+});
+
+export default withRedux(initStore, connect)(PitButton);

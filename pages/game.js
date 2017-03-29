@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import withRedux from 'next-redux-wrapper';
 
-import { initStore } from '../src/reducers/game';
+import { initStore, startGame } from '../src/reducers/game';
 
 import Header from '../src/components/header';
 import Board from '../src/components/board';
@@ -14,6 +14,10 @@ class Game extends Component {
             score: PropTypes.arrayOf(React.PropTypes.number).isRequired,
             currentIndexPlayer: PropTypes.number.isRequired,
         }).isRequired,
+    }
+
+    componentDidMount() {
+        this.props.dispatch(startGame());
     }
 
     render() {
@@ -44,4 +48,8 @@ class Game extends Component {
     }
 }
 
-export default withRedux(initStore, state => ({ game: state.game }))(Game);
+const mapStateToProps = state => ({
+    game: state.game,
+});
+
+export default withRedux(initStore, mapStateToProps)(Game);
