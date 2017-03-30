@@ -35,11 +35,12 @@ function pickPebbleGame(game, position) {
 
 export const reducer = (state = { game: startGameModel() }, action) => {
     switch (action.type) {
-    case START_GAME: return {
-        game: startGameModel(),
-    };
-    case PICK_PEBBLE: return { game: pickPebbleGame(state.game, action.payload) };
-    default: return state;
+    case START_GAME:
+        return { game: startGameModel() };
+    case PICK_PEBBLE:
+        return { game: pickPebbleGame(state.game, action.payload) };
+    default:
+        return state;
     }
 };
 
