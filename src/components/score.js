@@ -2,9 +2,9 @@ import React, { PropTypes, Component } from 'react';
 
 export default class Score extends Component {
     static propTypes = {
-        score: PropTypes.arrayOf(React.PropTypes.number).isRequired,
-        flexDirection: PropTypes.oneOf(['row', 'row-reverse']).isRequired,
+        score: PropTypes.number.isRequired,
         text: PropTypes.string.isRequired,
+        flexDirection: PropTypes.oneOf(['row', 'row-reverse']),
         highlight: PropTypes.bool,
         color: PropTypes.string,
     }
@@ -12,6 +12,7 @@ export default class Score extends Component {
     static defaultProps = {
         highlight: true,
         color: 'white',
+        flexDirection: 'row',
     }
 
     containerStyle = direction => ({
