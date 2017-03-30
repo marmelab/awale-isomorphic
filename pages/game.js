@@ -16,10 +16,6 @@ class Game extends Component {
         }).isRequired,
     }
 
-    componentDidMount() {
-        this.props.dispatch(startGame());
-    }
-
     render() {
         const game = this.props.game;
         const isCurrentPlayerOne = (game.currentIndexPlayer === 0);

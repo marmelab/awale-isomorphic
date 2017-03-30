@@ -13,8 +13,8 @@ import createPlayer from '../awale/player/Player';
 import { canPlayerPlayPosition } from '../awale/board/Board';
 import { GAME_CONTINUE } from '../awale/constants/Constants';
 
-function startGameModel() {
-    return createGame([createPlayer(0), createPlayer(1, true)]);
+function startGameModel(isHuman) {
+    return createGame([createPlayer(0), createPlayer(1, isHuman)]);
 }
 
 function pickPebbleGame(game, position) {
@@ -33,10 +33,10 @@ function pickPebbleGame(game, position) {
     return nextGame;
 }
 
-export const reducer = (state = { game: startGameModel() }, action) => {
+export const reducer = (state = { game: startGameModel(true) }, action) => {
     switch (action.type) {
     case START_GAME:
-        return { game: startGameModel() };
+        return { game: startGameModel(action.payload) };
     case PICK_PEBBLE:
         return { game: pickPebbleGame(state.game, action.payload) };
     default:
@@ -44,8 +44,8 @@ export const reducer = (state = { game: startGameModel() }, action) => {
     }
 };
 
-export const startGame = () => (dispatch) => {
-    return dispatch({ type: START_GAME, game: startGameModel() });
+export const startGame = isHuman => (dispatch) => {
+    return dispatch({ type: START_GAME, payload: isHuman });
 };
 
 export const initStore = (initialState) => {
