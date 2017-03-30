@@ -1,6 +1,8 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
+import { START_GAME, PICK_PEBBLE } from '../actions/actions';
+
 import {
     create as createGame,
     playTurn,
@@ -33,14 +35,16 @@ function pickPebbleGame(game, position) {
 
 export const reducer = (state = { game: startGameModel() }, action) => {
     switch (action.type) {
-    case 'START_GAME': return { game: startGameModel() };
-    case 'PICK_PEBBLE': return { game: pickPebbleGame(action.game, action.position) };
+    case START_GAME: return {
+        game: startGameModel(),
+    };
+    case PICK_PEBBLE: return { game: pickPebbleGame(state.game, action.payload) };
     default: return state;
     }
 };
 
 export const startGame = () => (dispatch) => {
-    return dispatch({ type: 'START_GAME', game: startGameModel() });
+    return dispatch({ type: START_GAME, game: startGameModel() });
 };
 
 export const initStore = (initialState) => {
