@@ -22,18 +22,35 @@ class Game extends Component {
 
     render() {
         const game = this.props.game;
+        const isCurrentPlayerOne = (game.currentIndexPlayer === 0);
 
         return (
-            <div className="game">
+            <div>
                 <Header />
 
-                <Board
-                    board={game.board}
-                    currentIndexPlayer={game.currentIndexPlayer}
-                    canPlay
+                <Score
+                    score={game.score[1]}
+                    text="Their turn"
+                    flexDirection="row-reverse"
+                    highlight={!isCurrentPlayerOne}
+                    color="#34495e"
                 />
 
-                <Score score={game.score} />
+                <div className="game">
+                    <Board
+                        board={game.board}
+                        currentIndexPlayer={game.currentIndexPlayer}
+                        canPlay
+                    />
+                </div>
+
+                <Score
+                    score={game.score[0]}
+                    text="Your turn"
+                    flexDirection="row"
+                    highlight={isCurrentPlayerOne}
+                    color="#9b59b6"
+                />
 
                 <style jsx>{`
                   .game {
