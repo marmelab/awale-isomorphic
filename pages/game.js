@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import withRedux from 'next-redux-wrapper';
 
-import { initStore, startGame } from '../src/reducers/game';
+import { initStore } from '../src/reducers/game';
 
 import Header from '../src/components/header';
 import Board from '../src/components/board';

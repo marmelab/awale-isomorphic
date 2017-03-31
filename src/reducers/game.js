@@ -13,8 +13,31 @@ import createPlayer from '../awale/player/Player';
 import { canPlayerPlayPosition } from '../awale/board/Board';
 import { GAME_CONTINUE } from '../awale/constants/Constants';
 
+import config from '../../config';
+
 function startGameModel(isHuman) {
     return createGame([createPlayer(0), createPlayer(1, isHuman)]);
+}
+
+function fetchColumn(game) {
+    return fetch(config.apiUrl, {
+        method: 'POST',
+        body: JSON.stringify({ Score: game.score, Board: game.board }),
+    })
+    .then(response => response.text())
+    .then(parseInt);
+}
+
+function checkComputerTurn(game) {
+    const player = getCurrentPlayer(game);
+    if (player.isHuman) {
+        return;
+    }
+
+    fetchColumn(game).then((bestPosition) => {
+        console.log(bestPosition);
+        pickPebbleGame(game, bestPosition);
+    });
 }
 
 function pickPebbleGame(game, position) {
@@ -28,10 +51,13 @@ function pickPebbleGame(game, position) {
     nextGame = checkWinner(nextGame);
     if (nextGame.gameState !== GAME_CONTINUE) {
         console.log(nextGame.gameState);
+    } else {
+        checkComputerTurn(nextGame);
     }
 
     return nextGame;
 }
+
 
 export const reducer = (state = { game: startGameModel(true) }, action) => {
     switch (action.type) {

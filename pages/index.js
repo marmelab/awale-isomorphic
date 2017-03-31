@@ -24,8 +24,8 @@ export class Index extends Component {
                 <nav>
                     <h1>Awale</h1>
                     <ul>
-                        <li onClick={this.startPlayingWithPlayer}><Link href="/game"><a>Solo</a></Link></li>
-                        <li onClick={this.startPlayingWithIA}><Link href="/game"><a>With a friend</a></Link></li>
+                        <li onClick={this.startPlayingWithIA}><Link href="/game"><a>Solo</a></Link></li>
+                        <li onClick={this.startPlayingWithPlayer}><Link href="/game"><a>With a friend</a></Link></li>
                     </ul>
                 </nav>
                 <style jsx>{`
