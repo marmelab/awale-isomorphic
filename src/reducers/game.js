@@ -15,14 +15,14 @@ import { GAME_CONTINUE } from '../awale/constants/Constants';
 
 import config from '../../config';
 
-export const reducer = (state = { game: startGameModel(true) }, action) => {
+export const reducer = (state = { game: startGameModel(true), canPlay: true }, action) => {
     switch (action.type) {
     case START_GAME:
-        return { game: startGameModel(action.payload) };
+        return { ...state, game: startGameModel(action.payload) };
     case PICK_PEBBLE:
-        return { game: pickPebbleGame(state.game, action.payload) };
+        return { ...state, game: pickPebbleGame(state.game, action.payload) };
     case PICK_PEBBLE_IA:
-        return { game: pickPebbleGame(state.game, action.payload) };
+        return { ...state, game: pickPebbleGame(state.game, action.payload, state.canPlay) };
     default:
         return state;
     }
@@ -40,13 +40,18 @@ const pickPebbleIAMiddleware = store => next => action => {
     if (action.type === PICK_PEBBLE) {
         next(action);
 
-        const nextGame = store.getState().game;
+        const state = store.getState();
+        const nextGame = state.game;
         const player = getCurrentPlayer(nextGame);
         if (player.isHuman) {
             return true;
         }
 
-        return fetchColumn(nextGame).then(bestPosition => store.dispatch(pickPebbleIA(bestPosition)));
+        state.canPlay = false;
+        return fetchColumn(nextGame).then((bestPosition) => {
+            state.canPlay = true;
+            store.dispatch(pickPebbleIA(bestPosition));
+        });
     }
 
     return next(action);
@@ -79,7 +84,11 @@ function fetchColumn(game) {
     .then(parseInt);
 }
 
-function pickPebbleGame(game, position) {
+function pickPebbleGame(game, position, canPlayIA = true) {
+    if (!canPlayIA) {
+        return game;
+    }
+
     const player = getCurrentPlayer(game);
     const canPlay = canPlayerPlayPosition(player, game.board, position);
     if (!canPlay) {

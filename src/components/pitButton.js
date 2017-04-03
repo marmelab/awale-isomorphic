@@ -10,10 +10,6 @@ export class PitButton extends Component {
         pickPebble: PropTypes.func.isRequired,
     }
 
-    static defaultProps = {
-        enabled: true,
-    }
-
     handlePickPebble = () => {
         this.props.pickPebble(this.props.pitIndex);
     }
