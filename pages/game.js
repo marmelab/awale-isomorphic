@@ -2,10 +2,12 @@ import React, { PropTypes, Component } from 'react';
 import withRedux from 'next-redux-wrapper';
 
 import { initStore } from '../src/reducers/game';
+import { GAME_CONTINUE } from '../src/awale/constants/Constants';
 
 import Header from '../src/components/header';
 import Board from '../src/components/board';
 import Score from '../src/components/score';
+import GameOver from '../src/components/gameOver';
 
 class Game extends Component {
     static propTypes = {
@@ -19,6 +21,7 @@ class Game extends Component {
     render() {
         const game = this.props.game;
         const isCurrentPlayerOne = (game.currentIndexPlayer === 0);
+        const gameContinue = game.gameState === GAME_CONTINUE;
 
         return (
             <div>
@@ -28,23 +31,24 @@ class Game extends Component {
                     score={game.score[1]}
                     text="Their turn"
                     flexDirection="row-reverse"
-                    highlight={!isCurrentPlayerOne}
+                    highlight={!isCurrentPlayerOne || !gameContinue}
                     color="#34495e"
                 />
 
                 <div className="game">
-                    <Board
+                    {gameContinue
+                    ? <Board
                         board={game.board}
                         currentIndexPlayer={game.currentIndexPlayer}
-                        canPlay
                     />
+                    : <GameOver />}
                 </div>
 
                 <Score
                     score={game.score[0]}
                     text="Your turn"
                     flexDirection="row"
-                    highlight={isCurrentPlayerOne}
+                    highlight={isCurrentPlayerOne || !gameContinue}
                     color="#9b59b6"
                 />
 

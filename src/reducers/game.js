@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
-import { START_GAME, PICK_PEBBLE, PICK_PEBBLE_IA } from '../actions/actions';
+import { START_GAME, RESTART_GAME, PICK_PEBBLE, PICK_PEBBLE_IA } from '../actions/actions';
 
 import {
     create as createGame,
@@ -11,7 +11,6 @@ import {
 } from '../awale/game/Game';
 import createPlayer from '../awale/player/Player';
 import { canPlayerPlayPosition } from '../awale/board/Board';
-import { GAME_CONTINUE } from '../awale/constants/Constants';
 
 import config from '../../config';
 
@@ -19,6 +18,8 @@ export const reducer = (state = { game: startGameModel(true), canPlay: true }, a
     switch (action.type) {
     case START_GAME:
         return { ...state, game: startGameModel(action.payload) };
+    case RESTART_GAME:
+        return { ...state, game: startGameModel(state.game.players[1].isHuman) };
     case PICK_PEBBLE:
         return { ...state, game: pickPebbleGame(state.game, action.payload) };
     case PICK_PEBBLE_IA:
@@ -97,9 +98,5 @@ function pickPebbleGame(game, position, canPlayIA = true) {
 
     let nextGame = playTurn(game, position);
     nextGame = checkWinner(nextGame);
-    if (nextGame.gameState !== GAME_CONTINUE) {
-        console.log(nextGame.gameState);
-    }
-
     return nextGame;
 }
