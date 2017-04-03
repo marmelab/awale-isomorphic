@@ -22,6 +22,7 @@ class Game extends Component {
         const game = this.props.game;
         const isCurrentPlayerOne = (game.currentIndexPlayer === 0);
         const gameContinue = game.gameState === GAME_CONTINUE;
+        const textScore = gameContinue ? 'turn' : 'score';
 
         return (
             <div>
@@ -29,7 +30,7 @@ class Game extends Component {
 
                 <Score
                     score={game.score[1]}
-                    text="Their turn"
+                    text={`Their ${textScore}`}
                     flexDirection="row-reverse"
                     highlight={!isCurrentPlayerOne || !gameContinue}
                     color="#34495e"
@@ -46,7 +47,7 @@ class Game extends Component {
 
                 <Score
                     score={game.score[0]}
-                    text="Your turn"
+                    text={`Your ${textScore}`}
                     flexDirection="row"
                     highlight={isCurrentPlayerOne || !gameContinue}
                     color="#9b59b6"
