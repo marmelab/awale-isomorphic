@@ -1,10 +1,17 @@
-import React, { Component } from 'react';
+import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import Link from 'next/link';
 
 import { restartGame as restartGameAction } from '../actions/actions';
 
 export class GameOver extends Component {
+    static propTypes = {
+        restartGame: PropTypes.func,
+    }
+
+    static defaultProps = {
+        restartGame: () => {},
+    }
 
     handleRestartGame = () => {
         this.props.restartGame();
