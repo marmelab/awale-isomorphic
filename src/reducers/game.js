@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
-import { START_GAME, PICK_PEBBLE } from '../actions/actions';
+import { START_GAME, PICK_PEBBLE, PICK_PEBBLE_IA } from '../actions/actions';
 
 import {
     create as createGame,
@@ -21,6 +21,8 @@ export const reducer = (state = { game: startGameModel(true) }, action) => {
         return { game: startGameModel(action.payload) };
     case PICK_PEBBLE:
         return { game: pickPebbleGame(state.game, action.payload) };
+    case PICK_PEBBLE_IA:
+        return { game: pickPebbleGame(state.game, action.payload) };
     default:
         return state;
     }
@@ -30,15 +32,21 @@ export const startGame = isHuman => dispatch => {
     return dispatch({ type: START_GAME, payload: isHuman });
 };
 
-const pickPebbleIA = store => next => action => {
+export const pickPebbleIA = bestPosition => dispatch => {
+    return dispatch({ type: PICK_PEBBLE_IA, payload: bestPosition });
+};
+
+const pickPebbleIAMiddleware = store => next => action => {
     if (action.type === PICK_PEBBLE) {
         next(action);
 
-        const game = checkComputerTurn(store.getState().game);
-        const newAction = Object.assign({}, action, { game });
-        delete newAction.promise;
-        console.log(newAction);
-        return next(newAction);
+        const nextGame = store.getState().game;
+        const player = getCurrentPlayer(nextGame);
+        if (player.isHuman) {
+            return true;
+        }
+
+        return fetchColumn(nextGame).then(bestPosition => store.dispatch(pickPebbleIA(bestPosition)));
     }
 
     return next(action);
@@ -52,7 +60,7 @@ export const initStore = (initialState) => {
         composeEnhancers(
             applyMiddleware(
                 thunkMiddleware,
-                pickPebbleIA,
+                pickPebbleIAMiddleware,
             ),
         ),
     );
@@ -69,17 +77,6 @@ function fetchColumn(game) {
     })
     .then(response => response.text())
     .then(parseInt);
-}
-
-function checkComputerTurn(game) {
-    const player = getCurrentPlayer(game);
-    if (player.isHuman) {
-        return game;
-    }
-
-    return fetchColumn(game).then((bestPosition) => {
-        return pickPebbleGame(game, bestPosition);
-    });
 }
 
 function pickPebbleGame(game, position) {

@@ -9,7 +9,7 @@ describe('Title', () => {
         expect(app.find('h1').text()).toEqual('Awale');
     });
 
-    it('should contain two links', () => {
+    it('should contain two element in the menu', () => {
         const app = shallow(<App />);
         expect(app.find('a').length).toEqual(2);
     });
