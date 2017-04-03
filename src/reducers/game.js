@@ -15,6 +15,49 @@ import { GAME_CONTINUE } from '../awale/constants/Constants';
 
 import config from '../../config';
 
+export const reducer = (state = { game: startGameModel(true) }, action) => {
+    switch (action.type) {
+    case START_GAME:
+        return { game: startGameModel(action.payload) };
+    case PICK_PEBBLE:
+        return { game: pickPebbleGame(state.game, action.payload) };
+    default:
+        return state;
+    }
+};
+
+export const startGame = isHuman => dispatch => {
+    return dispatch({ type: START_GAME, payload: isHuman });
+};
+
+const pickPebbleIA = store => next => action => {
+    if (action.type === PICK_PEBBLE) {
+        next(action);
+
+        const game = checkComputerTurn(store.getState().game);
+        const newAction = Object.assign({}, action, { game });
+        delete newAction.promise;
+        console.log(newAction);
+        return next(newAction);
+    }
+
+    return next(action);
+};
+
+export const initStore = (initialState) => {
+    const composeEnhancers = global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+    return createStore(
+        reducer,
+        initialState,
+        composeEnhancers(
+            applyMiddleware(
+                thunkMiddleware,
+                pickPebbleIA,
+            ),
+        ),
+    );
+};
+
 function startGameModel(isHuman) {
     return createGame([createPlayer(0), createPlayer(1, isHuman)]);
 }
@@ -31,12 +74,11 @@ function fetchColumn(game) {
 function checkComputerTurn(game) {
     const player = getCurrentPlayer(game);
     if (player.isHuman) {
-        return;
+        return game;
     }
 
-    fetchColumn(game).then((bestPosition) => {
-        console.log(bestPosition);
-        pickPebbleGame(game, bestPosition);
+    return fetchColumn(game).then((bestPosition) => {
+        return pickPebbleGame(game, bestPosition);
     });
 }
 
@@ -51,36 +93,7 @@ function pickPebbleGame(game, position) {
     nextGame = checkWinner(nextGame);
     if (nextGame.gameState !== GAME_CONTINUE) {
         console.log(nextGame.gameState);
-    } else {
-        checkComputerTurn(nextGame);
     }
 
     return nextGame;
 }
-
-
-export const reducer = (state = { game: startGameModel(true) }, action) => {
-    switch (action.type) {
-    case START_GAME:
-        return { game: startGameModel(action.payload) };
-    case PICK_PEBBLE:
-        return { game: pickPebbleGame(state.game, action.payload) };
-    default:
-        return state;
-    }
-};
-
-export const startGame = isHuman => (dispatch) => {
-    return dispatch({ type: START_GAME, payload: isHuman });
-};
-
-export const initStore = (initialState) => {
-    const composeEnhancers = global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-    return createStore(
-        reducer,
-        initialState,
-        composeEnhancers(
-            applyMiddleware(thunkMiddleware),
-        ),
-    );
-};
