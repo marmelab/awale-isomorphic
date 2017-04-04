@@ -9,9 +9,13 @@ run:
 	npm run dev
 
 test:
+	make test-unit
+	make test-e2e
+
+test-unit:
 	node_modules/.bin/jest
 
-test-selenium:
+test-e2e:
 	SELENIUM_BROWSER_BINARY_PATH="./node_modules/selenium-standalone/.selenium/chromedriver/2.28-x64-chromedriver" \
 	./node_modules/.bin/mocha --recursive ./e2e
 

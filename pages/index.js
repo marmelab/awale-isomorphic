@@ -25,15 +25,19 @@ export class Index extends Component {
             <div>
                 <Header />
 
-                <nav>
-                    <h1>Awale</h1>
-                    <ul>
-                        <li onClick={this.startPlayingWithIA}><Link href="/game"><a>Solo</a></Link></li>
-                        <li onClick={this.startPlayingWithPlayer}><Link href="/game"><a>With a friend</a></Link></li>
+                <nav className="menu">
+                    <h1 className="menu__h1">Awale</h1>
+                    <ul className="menu__ul">
+                        <li className="menu__li" onClick={this.startPlayingWithIA}>
+                            <Link href="/game"><a className="menu__a" id="test">Solo</a></Link>
+                        </li>
+                        <li className="menu__li" onClick={this.startPlayingWithPlayer}>
+                            <Link href="/game"><a className="menu__a">With a friend</a></Link>
+                        </li>
                     </ul>
                 </nav>
                 <style jsx>{`
-                  nav {
+                  .menu {
                       display: flex;
                       flex-direction: column;
                       font-size: 60px;
@@ -42,20 +46,20 @@ export class Index extends Component {
                       text-align: center;
                       width: 100%;
                   }
-                  nav h1 {
+                  .menu__h1 {
                       color: #ecf0f1;
                       font-weight: 200;
                       margin-bottom: 30px;
                   }
-                  nav ul {
+                  .menu__ul {
                       list-style-type: none;
                       padding: 0;
                   }
-                  nav li a {
+                  .menu__a {
                       text-decoration: none;
                       color: #138a72;
                   }
-                  nav li a:hover{
+                  .menu__a:hover{
                     color: white;
                   }
                 `}</style>
