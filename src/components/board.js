@@ -4,17 +4,7 @@ import PitButton from './pitButton';
 export default class Board extends Component {
     static propTypes = {
         board: PropTypes.arrayOf(React.PropTypes.number).isRequired,
-        pickPebble: PropTypes.func.isRequired,
         currentIndexPlayer: PropTypes.number.isRequired,
-        canPlay: PropTypes.bool,
-    }
-
-    static defaultProps = {
-        canPlay: true,
-    }
-
-    pickPebble = (position) => {
-        this.props.pickPebble(position);
     }
 
     render() {
@@ -29,7 +19,6 @@ export default class Board extends Component {
             <div className={`board ${turn}`}>
                 {topBoard.map((pit, i) =>
                     <PitButton
-                        onPress={this.pickPebble}
                         pitValue={pit}
                         pitIndex={size - 1 - i}
                         key={`topBoard-${i}`}
@@ -37,7 +26,6 @@ export default class Board extends Component {
                 )}
                 {bottomBoard.map((pit, i) =>
                     <PitButton
-                        onPress={this.pickPebble}
                         pitValue={pit}
                         pitIndex={i}
                         key={`bottomBoard-${i}`}

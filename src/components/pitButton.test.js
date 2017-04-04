@@ -1,13 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
-import PitButton from './pitButton';
+import { PitButton } from './pitButton';
 
 describe('<PitButton />', () => {
     it('should render 0 value', () => {
         const pitButton = shallow(
             <PitButton
-                onPress={() => {}}
+                pickPebble={() => {}}
                 pitValue={0}
                 pitIndex={0}
             />);
@@ -19,7 +19,7 @@ describe('<PitButton />', () => {
     it('should render 4 value', () => {
         const pitButton = shallow(
             <PitButton
-                onPress={() => {}}
+                pickPebble={() => {}}
                 pitValue={4}
                 pitIndex={0}
             />);
@@ -30,7 +30,7 @@ describe('<PitButton />', () => {
         const onButtonClick = sinon.spy();
         const pitButton = shallow(
             <PitButton
-                onPress={onButtonClick}
+                pickPebble={onButtonClick}
                 pitValue={4}
                 pitIndex={0}
             />);
@@ -43,7 +43,7 @@ describe('<PitButton />', () => {
         const onButtonClick = sinon.spy();
         const pitButton = shallow(
             <PitButton
-                onPress={onButtonClick}
+                pickPebble={onButtonClick}
                 pitValue={4}
                 pitIndex={6}
             />);

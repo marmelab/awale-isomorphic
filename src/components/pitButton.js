@@ -1,23 +1,26 @@
 import React, { PropTypes, Component } from 'react';
+import { connect } from 'react-redux';
 
-export default class PitButton extends Component {
+import { pickPebble as pickPebbleAction } from '../actions/actions';
+
+export class PitButton extends Component {
     static propTypes = {
-        onPress: PropTypes.func.isRequired,
         pitValue: PropTypes.number.isRequired,
         pitIndex: PropTypes.number.isRequired,
+        pickPebble: PropTypes.func.isRequired,
     }
 
     static defaultProps = {
         enabled: true,
     }
 
-    pickPebble = () => {
-        this.props.onPress(this.props.pitIndex);
+    handlePickPebble = () => {
+        this.props.pickPebble(this.props.pitIndex);
     }
 
     render() {
         return (
-            <button onClick={this.pickPebble} className="pit">
+            <button onClick={this.handlePickPebble} className="pit">
                 {this.props.pitValue}
 
                 <style jsx>{`
@@ -39,3 +42,5 @@ export default class PitButton extends Component {
         );
     }
 }
+
+export default connect(null, { pickPebble: pickPebbleAction })(PitButton);
