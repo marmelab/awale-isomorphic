@@ -15,11 +15,11 @@ describe('Menu page', () => {
         assert.equal(linkItems.length, 2);
     });
 
-    // test.it('should redirect "game" page', async () => {
-    //     await driver.wait(until.elementLocated(By.css('.menu__a')));
-    //     driver.findElement(By.id('test')).click();
-    //     console.log(driver.findElement(By.css('body')).getAttribute('outerHTML'));
-    // });
+    it('should redirect "game" page', async () => {
+        await driver.wait(until.elementLocated(By.id('newGame')));
+        await driver.findElement(By.id('newGame')).click();
+        await driver.wait(until.elementLocated(By.css('.game')));
+    });
 
     after(() => {
         driver.quit();

@@ -29,7 +29,7 @@ export class Index extends Component {
                     <h1 className="menu__h1">Awale</h1>
                     <ul className="menu__ul">
                         <li className="menu__li" onClick={this.startPlayingWithIA}>
-                            <Link href="/game"><a className="menu__a" id="test">Solo</a></Link>
+                            <Link href="/game"><a className="menu__a" id="newGame">Solo</a></Link>
                         </li>
                         <li className="menu__li" onClick={this.startPlayingWithPlayer}>
                             <Link href="/game"><a className="menu__a">With a friend</a></Link>
