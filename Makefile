@@ -12,6 +12,7 @@ test:
 	node_modules/.bin/jest
 
 test-selenium:
+	SELENIUM_BROWSER_BINARY_PATH="./node_modules/selenium-standalone/.selenium/chromedriver/2.28-x64-chromedriver" \
 	./node_modules/.bin/mocha --recursive ./e2e
 
 lint:
