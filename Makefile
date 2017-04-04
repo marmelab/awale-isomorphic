@@ -12,7 +12,7 @@ test:
 	node_modules/.bin/jest
 
 test-selenium:
-	./node_modules/.bin/mocha ./e2e/index.js
+	./node_modules/.bin/mocha --recursive ./e2e
 
 lint:
 	node_modules/.bin/eslint pages/ __tests__/ src/
