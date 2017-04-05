@@ -27,7 +27,7 @@ exports[`Title should match with snapshot 1`] = `
           className="menu__a"
           data-jsx={3449686394}
           href="/game"
-          id="test"
+          id="newGame"
           onClick={[Function]}
         >
           Solo
