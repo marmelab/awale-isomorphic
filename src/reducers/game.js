@@ -30,10 +30,6 @@ export const reducer = (state = initState, action) => {
     }
 };
 
-export const startGame = isHuman => dispatch => {
-    return dispatch({ type: START_GAME, payload: isHuman });
-};
-
 export const pickPebbleIA = bestPosition => dispatch => {
     return dispatch({ type: PICK_PEBBLE_IA, payload: bestPosition });
 };

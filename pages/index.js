@@ -1,19 +1,23 @@
-import React, { Component } from 'react';
+import React, { PropTypes, Component } from 'react';
 import withRedux from 'next-redux-wrapper';
 import Link from 'next/link';
 
-import { initStore, startGame } from '../src/reducers/game';
+import { initStore } from '../src/reducers/game';
+import { startGame as startGameAction } from '../src/actions/actions';
 
 import Header from '../src/components/header';
 
 export class Index extends Component {
+    static propTypes = {
+        startGame: PropTypes.func.isRequired,
+    }
 
     startPlayingWithPlayer = () => {
-        this.props.dispatch(startGame(true));
+        this.props.startGame(true);
     }
 
     startPlayingWithIA = () => {
-        this.props.dispatch(startGame(false));
+        this.props.startGame(false);
     }
 
     render() {
@@ -60,4 +64,4 @@ export class Index extends Component {
     }
 }
 
-export default withRedux(initStore, null)(Index);
+export default withRedux(initStore, null, { startGame: startGameAction })(Index);
