@@ -5,7 +5,7 @@ module.exports = url => driver => ({
         game: By.css('.game'),
         board: By.css('.board'),
         score: By.css('.score'),
-        pit: By.css('.pit'),
+        pit: indexPit => By.id(`pit_${indexPit}`),
     },
 
     navigate() {
@@ -25,12 +25,16 @@ module.exports = url => driver => ({
         return driver.findElement(this.elements.board);
     },
 
-    selectAllPit() {
-        return driver.findElements(this.elements.pit);
+    selectPit(indexPit) {
+        return driver.findElement(this.elements.pit(indexPit));
     },
 
     async pickPebble(indexPit) {
-        const allPit = await this.selectAllPit();
-        return allPit[indexPit].click();
+        const pit = await this.selectPit(indexPit);
+        return pit.click();
+    },
+
+    countPebble(indexPit) {
+        return this.selectPit(indexPit);
     },
 });

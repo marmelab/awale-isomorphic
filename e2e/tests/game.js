@@ -19,7 +19,6 @@ describe('Game page', () => {
     it('should pick pebble on first pit', async () => {
         await GamePage.pickPebble(0);
         await driver.sleep(300);
-        assert.equal(true, true);
-        // assert.equal(await GamePage.countPebble(0), 0);
+        assert.equal(await GamePage.countPebble(0).getAttribute('value'), 0);
     });
 });
