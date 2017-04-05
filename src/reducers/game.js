@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
 import { START_GAME, RESTART_GAME, PICK_PEBBLE, PICK_PEBBLE_IA } from '../actions/actions';
+import pickPebbleIAMiddleware from '../middleware/game';
 
 import {
     create as createGame,
@@ -11,8 +12,6 @@ import {
 } from '../awale/game/Game';
 import createPlayer from '../awale/player/Player';
 import { canPlayerPlayPosition } from '../awale/board/Board';
-
-import config from '../../config';
 
 const initState = { game: startGameModel(true), canPlay: true };
 
@@ -39,27 +38,6 @@ export const pickPebbleIA = bestPosition => dispatch => {
     return dispatch({ type: PICK_PEBBLE_IA, payload: bestPosition });
 };
 
-const pickPebbleIAMiddleware = store => next => action => {
-    if (action.type === PICK_PEBBLE) {
-        next(action);
-
-        const state = store.getState();
-        const nextGame = state.game;
-        const player = getCurrentPlayer(nextGame);
-        if (player.isHuman) {
-            return true;
-        }
-
-        state.canPlay = false;
-        return fetchColumn(nextGame).then((bestPosition) => {
-            state.canPlay = true;
-            store.dispatch(pickPebbleIA(bestPosition));
-        });
-    }
-
-    return next(action);
-};
-
 export const initStore = (initialState) => {
     const composeEnhancers = global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     return createStore(
@@ -76,15 +54,6 @@ export const initStore = (initialState) => {
 
 function startGameModel(isHuman) {
     return createGame([createPlayer(0), createPlayer(1, isHuman)]);
-}
-
-function fetchColumn(game) {
-    return fetch(config.apiUrl, {
-        method: 'POST',
-        body: JSON.stringify({ Score: game.score, Board: game.board }),
-    })
-    .then(response => response.text())
-    .then(parseInt);
 }
 
 function pickPebbleGame(game, position, canPlayIA = true) {
