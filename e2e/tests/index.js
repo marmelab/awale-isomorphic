@@ -7,20 +7,18 @@ const HomePageFactory = require('../pages/homePage');
 describe('Menu page', () => {
     const HomePage = HomePageFactory('http://localhost:3000')(driver);
 
-    it('should find two links', async () => {
+    beforeEach(async () => {
         await HomePage.navigate();
+    });
+
+    it('should find two links', async () => {
         const linkItems = await HomePage.selectLinkMenu();
         assert.equal(linkItems.length, 2);
     });
 
     it('should redirect "game" page', async () => {
-        await HomePage.navigate();
         await HomePage.startGame();
-        await driver.sleep(500);
+        await driver.sleep(300);
         assert.equal(await driver.getCurrentUrl(), 'http://localhost:3000/game');
-    });
-
-    after(() => {
-        driver.quit();
     });
 });

@@ -2,8 +2,10 @@ const { until, By } = require('selenium-webdriver');
 
 module.exports = url => driver => ({
     elements: {
-        newGame: By.id('newGame'),
-        linkMenu: By.css('.menu__a'),
+        game: By.css('.game'),
+        board: By.css('.board'),
+        score: By.css('.score'),
+        pit: By.css('.pit'),
     },
 
     navigate() {
@@ -12,15 +14,23 @@ module.exports = url => driver => ({
     },
 
     waitUntilVisible() {
-        return driver.wait(until.elementLocated(this.elements.newGame));
+        return driver.wait(until.elementLocated(this.elements.game));
     },
 
-    selectLinkMenu() {
-        return driver.findElements(this.elements.linkMenu);
+    selectAllScore() {
+        return driver.findElements(this.elements.score);
     },
 
-    startGame() {
-        const newGameLink = driver.findElement(this.elements.newGame);
-        return newGameLink.click();
+    selectBoard() {
+        return driver.findElement(this.elements.board);
+    },
+
+    selectAllPit() {
+        return driver.findElements(this.elements.pit);
+    },
+
+    async pickPebble(indexPit) {
+        const allPit = await this.selectAllPit();
+        return allPit[indexPit].click();
     },
 });

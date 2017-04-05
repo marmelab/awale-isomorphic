@@ -7,12 +7,19 @@ const GamePageFactory = require('../pages/gamePage');
 describe('Game page', () => {
     const GamePage = GamePageFactory('http://localhost:3000/game')(driver);
 
-    it('should find score', async () => {
+    beforeEach(async () => {
         await GamePage.navigate();
-        assert.equal(true, true);
     });
 
-    after(() => {
-        driver.quit();
+    it('should find score', async () => {
+        const allScore = await GamePage.selectAllScore();
+        assert.equal(allScore.length, 2);
+    });
+
+    it('should pick pebble on first pit', async () => {
+        await GamePage.pickPebble(0);
+        await driver.sleep(300);
+        assert.equal(true, true);
+        // assert.equal(await GamePage.countPebble(0), 0);
     });
 });
