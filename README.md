@@ -14,6 +14,7 @@ You can now go to [http://localhost:3000](http://localhost:3000) in your browser
 ## Player vs IA
 
 You can download this project [Awale on Golang](https://github.com/marmelab/awale-go) et launch `make run-webserver`.
+If you want to play Player vs Player, not need for this project.
 
 ## Render
 
