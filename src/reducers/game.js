@@ -30,10 +30,6 @@ export const reducer = (state = initState, action) => {
     }
 };
 
-export const pickPebbleIA = bestPosition => dispatch => {
-    return dispatch({ type: PICK_PEBBLE_IA, payload: bestPosition });
-};
-
 export const initStore = (initialState) => {
     const composeEnhancers = global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     return createStore(

@@ -17,3 +17,8 @@ export const restartGame = () => ({
     type: RESTART_GAME,
     payload: null,
 });
+
+export const pickPebbleIA = bestPosition => ({
+    type: PICK_PEBBLE_IA,
+    payload: bestPosition,
+});

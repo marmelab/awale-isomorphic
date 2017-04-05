@@ -1,6 +1,5 @@
-import { PICK_PEBBLE } from '../actions/actions';
+import { PICK_PEBBLE, pickPebbleIA } from '../actions/actions';
 import { getCurrentPlayer } from '../awale/game/Game';
-import { pickPebbleIA } from '../reducers/game';
 
 import config from '../../config';
 
