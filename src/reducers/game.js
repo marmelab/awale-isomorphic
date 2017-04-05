@@ -14,7 +14,9 @@ import { canPlayerPlayPosition } from '../awale/board/Board';
 
 import config from '../../config';
 
-export const reducer = (state = { game: startGameModel(true), canPlay: true }, action) => {
+const initState = { game: startGameModel(true), canPlay: true };
+
+export const reducer = (state = initState, action) => {
     switch (action.type) {
     case START_GAME:
         return { ...state, game: startGameModel(action.payload) };
