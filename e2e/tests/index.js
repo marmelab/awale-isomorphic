@@ -1,6 +1,5 @@
 
 const assert = require('assert');
-const { until, By } = require('selenium-webdriver');
 const driver = require('../chromeDriver');
 
 const HomePageFactory = require('../pages/homePage');
