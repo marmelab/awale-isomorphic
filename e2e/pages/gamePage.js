@@ -29,9 +29,8 @@ module.exports = url => driver => ({
         return driver.findElement(this.elements.pit(indexPit));
     },
 
-    async pickPebble(indexPit) {
-        const pit = await this.selectPit(indexPit);
-        return pit.click();
+    pickPebble(indexPit) {
+        return this.selectPit(indexPit).click();
     },
 
     countPebble(indexPit) {

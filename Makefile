@@ -8,9 +8,7 @@ install-selenium:
 run:
 	npm run dev
 
-test:
-	make test-unit
-	make test-e2e
+test: test-unit test-e2e
 
 test-unit:
 	node_modules/.bin/jest
