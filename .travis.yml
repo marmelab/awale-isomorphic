@@ -3,6 +3,15 @@ language: node_js
 node_js:
     - "node"
 
+env:
+    global:
+        - CHROME_BIN="chromium-browser"
+        - DISPLAY=:99.0
+
+before_script:
+    - sh -e /etc/init.d/xvfb start
+    - sleep 3
+
 script: make test
 
 branches:
