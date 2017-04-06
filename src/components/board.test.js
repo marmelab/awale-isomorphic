@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Board from './board';
+import { Board } from './board';
 import { create as createBoard } from '../awale/board/Board';
 
 describe('<Board />', () => {

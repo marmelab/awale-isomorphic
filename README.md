@@ -10,3 +10,14 @@ make run
 ```
 
 You can now go to [http://localhost:3000](http://localhost:3000) in your browser and see the rendered
+
+## Player vs IA
+
+You can download this project [Awale on Golang](https://github.com/marmelab/awale-go) et launch `make run-webserver`.
+If you want to play Player vs Player, not need for this project.
+
+## Render
+
+Look inside assets directory if you want to see other pictures.
+
+![Board](../master/assets/board.png?raw=true)

@@ -1,7 +1,8 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
-import { START_GAME, PICK_PEBBLE } from '../actions/actions';
+import { START_GAME, RESTART_GAME, PICK_PEBBLE, PICK_PEBBLE_IA } from '../actions/actions';
+import pickPebbleIAMiddleware from '../middleware/game';
 
 import {
     create as createGame,
@@ -11,41 +12,22 @@ import {
 } from '../awale/game/Game';
 import createPlayer from '../awale/player/Player';
 import { canPlayerPlayPosition } from '../awale/board/Board';
-import { GAME_CONTINUE } from '../awale/constants/Constants';
 
-function startGameModel() {
-    return createGame([createPlayer(0), createPlayer(1, true)]);
-}
+const initState = { game: startGameModel(true), canPlay: true };
 
-function pickPebbleGame(game, position) {
-    const player = getCurrentPlayer(game);
-    const canPlay = canPlayerPlayPosition(player, game.board, position);
-    if (!canPlay) {
-        return game;
-    }
-
-    let nextGame = playTurn(game, position);
-    nextGame = checkWinner(nextGame);
-    if (nextGame.gameState !== GAME_CONTINUE) {
-        console.log(nextGame.gameState);
-    }
-
-    return nextGame;
-}
-
-export const reducer = (state = { game: startGameModel() }, action) => {
+export const reducer = (state = initState, action) => {
     switch (action.type) {
     case START_GAME:
-        return { game: startGameModel() };
+        return { ...state, game: startGameModel(action.payload) };
+    case RESTART_GAME:
+        return { ...state, game: startGameModel(state.game.players[1].isHuman) };
     case PICK_PEBBLE:
-        return { game: pickPebbleGame(state.game, action.payload) };
+        return { ...state, game: pickPebbleGame(state.game, action.payload) };
+    case PICK_PEBBLE_IA:
+        return { ...state, game: pickPebbleGame(state.game, action.payload, state.canPlay) };
     default:
         return state;
     }
-};
-
-export const startGame = () => (dispatch) => {
-    return dispatch({ type: START_GAME, game: startGameModel() });
 };
 
 export const initStore = (initialState) => {
@@ -54,7 +36,30 @@ export const initStore = (initialState) => {
         reducer,
         initialState,
         composeEnhancers(
-            applyMiddleware(thunkMiddleware),
+            applyMiddleware(
+                thunkMiddleware,
+                pickPebbleIAMiddleware,
+            ),
         ),
     );
 };
+
+function startGameModel(isHuman) {
+    return createGame([createPlayer(0), createPlayer(1, isHuman)]);
+}
+
+function pickPebbleGame(game, position, canPlayIA = true) {
+    if (!canPlayIA) {
+        return game;
+    }
+
+    const player = getCurrentPlayer(game);
+    const canPlay = canPlayerPlayPosition(player, game.board, position);
+    if (!canPlay) {
+        return game;
+    }
+
+    let nextGame = playTurn(game, position);
+    nextGame = checkWinner(nextGame);
+    return nextGame;
+}

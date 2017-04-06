@@ -1,10 +1,17 @@
 import React, { PropTypes, Component } from 'react';
+import { connect } from 'react-redux';
+
 import PitButton from './pitButton';
 
-export default class Board extends Component {
+export class Board extends Component {
     static propTypes = {
         board: PropTypes.arrayOf(React.PropTypes.number).isRequired,
         currentIndexPlayer: PropTypes.number.isRequired,
+        canPlay: PropTypes.bool,
+    }
+
+    static defaultProps = {
+        canPlay: true,
     }
 
     render() {
@@ -13,7 +20,10 @@ export default class Board extends Component {
         const topBoard = this.props.board.slice(halfSize, size).reverse();
         const bottomBoard = this.props.board.slice(0, halfSize);
 
-        const turn = this.props.currentIndexPlayer === 0 ? 'pit-bottom_color' : 'pit-top_color';
+        let turn = this.props.currentIndexPlayer === 0 ? 'pit-bottom_color' : 'pit-top_color';
+        if (!this.props.canPlay) {
+            turn = 'pit-color-disabled';
+        }
 
         return (
             <div className={`board ${turn}`}>
@@ -72,8 +82,19 @@ export default class Board extends Component {
                   .pit-bottom_color .pit:nth-child(-n+6) {
                         color: #f39c12;
                   }
+
+                  .pit-color-disabled .pit{
+                      background: #b94a00;
+                      color: #f39c12;
+                  }
                 `}</style>
             </div>
         );
     }
 }
+
+const mapStateToProps = state => ({
+    canPlay: state.canPlay,
+});
+
+export default connect(mapStateToProps, null)(Board);
