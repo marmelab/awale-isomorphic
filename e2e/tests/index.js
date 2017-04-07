@@ -7,7 +7,7 @@ const HomePageFactory = require('../pages/homePage');
 describe('Menu page', () => {
     const HomePage = HomePageFactory('http://localhost:8083')(driver);
 
-    beforeEach(async () => {
+    before(async () => {
         await HomePage.navigate();
     });
 

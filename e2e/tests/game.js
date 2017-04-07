@@ -7,7 +7,7 @@ const GamePageFactory = require('../pages/gamePage');
 describe('Game page', () => {
     const GamePage = GamePageFactory('http://localhost:8083/game')(driver);
 
-    beforeEach(async () => {
+    before(async () => {
         await GamePage.navigate();
     });
 
