@@ -7,9 +7,7 @@ const GamePageFactory = require('../pages/gamePage');
 describe('Game page', () => {
     const GamePage = GamePageFactory('http://localhost:8083/game')(driver);
 
-    before(async () => {
-        await GamePage.navigate();
-    });
+    before(async () => await GamePage.navigate());
 
     it('should find score', async () => {
         const allScore = await GamePage.selectAllScore();

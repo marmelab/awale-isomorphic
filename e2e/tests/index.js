@@ -7,9 +7,8 @@ const HomePageFactory = require('../pages/homePage');
 describe('Menu page', () => {
     const HomePage = HomePageFactory('http://localhost:8083')(driver);
 
-    before(async () => {
-        await HomePage.navigate();
-    });
+    before(async () => await HomePage.navigate());
+
 
     it('should find two links', async () => {
         const linkItems = await HomePage.selectLinkMenu();
