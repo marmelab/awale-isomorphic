@@ -11,14 +11,6 @@ before(async () => {
 
     return app.prepare().then(() => {
         const server = express();
-        server.get('/', (req, res) => {
-            return app.render(req, res, '/');
-        });
-
-        server.get('/game', (req, res) => {
-            return app.render(req, res, '/game');
-        });
-
         server.get('*', (req, res) => {
             return handle(req, res);
         })
