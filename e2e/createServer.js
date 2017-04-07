@@ -4,12 +4,12 @@ const driver = require('./chromeDriver');
 
 let listeningServer;
 
-// before(() => {
+before(async () => {
     const dev = process.env.NODE_ENV !== 'production';
     const app = next({ dev });
     const handle = app.getRequestHandler();
 
-    app.prepare().then(() => {
+    return app.prepare().then(() => {
         const server = express();
         server.get('/', (req, res) => {
             return app.render(req, res, '/');
@@ -24,7 +24,7 @@ let listeningServer;
         })
         listeningServer = server.listen(8083);
     });
-// });
+});
 
 after(async () => {
     listeningServer.close();

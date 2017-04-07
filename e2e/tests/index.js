@@ -9,7 +9,6 @@ describe('Menu page', () => {
 
     before(async () => await HomePage.navigate());
 
-
     it('should find two links', async () => {
         const linkItems = await HomePage.selectLinkMenu();
         assert.equal(linkItems.length, 2);
