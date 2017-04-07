@@ -3,7 +3,7 @@ install:
 	make install-selenium
 
 install-selenium:
-	./node_modules/.bin/selenium-standalone install --drivers.chrome.version=2.28 --drivers.chrome.baseURL=https://chromedriver.storage.googleapis.com
+	./node_modules/.bin/selenium-standalone install --version=3.3.0 --drivers.chrome.version=2.28
 
 run:
 	npm run dev
