@@ -4,7 +4,7 @@ const driver = require('./chromeDriver');
 
 let listeningServer;
 
-before(() => {
+// before(() => {
     const dev = process.env.NODE_ENV !== 'production';
     const app = next({ dev });
     const handle = app.getRequestHandler();
@@ -24,7 +24,7 @@ before(() => {
         })
         listeningServer = server.listen(8083);
     });
-});
+// });
 
 after(async () => {
     listeningServer.close();
