@@ -16,7 +16,7 @@ export class PitButton extends Component {
 
     render() {
         return (
-            <button onClick={this.handlePickPebble} className="pit">
+            <button onClick={this.handlePickPebble} className="pit" id={`pit_${this.props.pitIndex}`}>
                 {this.props.pitValue}
 
                 <style jsx>{`
