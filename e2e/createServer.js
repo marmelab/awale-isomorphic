@@ -19,7 +19,9 @@ before(() => {
             return app.render(req, res, '/game');
         });
 
-        server.get('*', handle);
+        server.get('*', (req, res) => {
+            return handle(req, res);
+        })
         listeningServer = server.listen(8083);
     });
 });
