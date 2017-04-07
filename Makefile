@@ -15,7 +15,10 @@ test-unit:
 
 test-e2e:
 	SELENIUM_BROWSER_BINARY_PATH="./node_modules/selenium-standalone/.selenium/chromedriver/2.24-x64-chromedriver" \
-	./node_modules/.bin/mocha --recursive ./e2e --timeout 10000
+	./node_modules/.bin/mocha \
+		--timeout 10000 \
+		./e2e/createServer.js \
+		./e2e/tests/*.js
 
 lint:
 	node_modules/.bin/eslint pages/ __tests__/ src/

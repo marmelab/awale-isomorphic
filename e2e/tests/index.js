@@ -5,7 +5,7 @@ const driver = require('../chromeDriver');
 const HomePageFactory = require('../pages/homePage');
 
 describe('Menu page', () => {
-    const HomePage = HomePageFactory('http://localhost:3000')(driver);
+    const HomePage = HomePageFactory('http://localhost:8083')(driver);
 
     beforeEach(async () => {
         await HomePage.navigate();
@@ -19,6 +19,6 @@ describe('Menu page', () => {
     it('should redirect "game" page', async () => {
         await HomePage.startGame();
         await driver.sleep(300);
-        assert.equal(await driver.getCurrentUrl(), 'http://localhost:3000/game');
+        assert.equal(await driver.getCurrentUrl(), 'http://localhost:8083/game');
     });
 });

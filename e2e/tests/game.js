@@ -5,7 +5,7 @@ const driver = require('../chromeDriver');
 const GamePageFactory = require('../pages/gamePage');
 
 describe('Game page', () => {
-    const GamePage = GamePageFactory('http://localhost:3000/game')(driver);
+    const GamePage = GamePageFactory('http://localhost:8083/game')(driver);
 
     beforeEach(async () => {
         await GamePage.navigate();
