@@ -17,7 +17,7 @@ test: ## Launch test
 	test-unit test-e2e
 
 test-unit:
-	node_modules/.bin/jest
+	./node_modules/.bin/jest --setupTestFrameworkScriptFile ./src/test/setupTests.js
 
 test-e2e:
 	SELENIUM_BROWSER_BINARY_PATH="./node_modules/selenium-standalone/.selenium/chromedriver/2.24-x64-chromedriver" \
