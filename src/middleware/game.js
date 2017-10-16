@@ -3,14 +3,12 @@ import { getCurrentPlayer } from '../awale/game/Game';
 
 import config from '../../config';
 
-function fetchColumn(game) {
-    return fetch(config.apiUrl, {
-        method: 'POST',
-        body: JSON.stringify({ Score: game.score, Board: game.board }),
-    })
-        .then(response => response.text())
-        .then(parseInt);
-}
+const fetchColumn = game => fetch(config.apiUrl, {
+    method: 'POST',
+    body: JSON.stringify({ Score: game.score, Board: game.board }),
+})
+    .then(response => response.text())
+    .then(parseInt);
 
 const pickPebbleIAMiddleware = store => next => (action) => {
     if (action.type === PICK_PEBBLE) {

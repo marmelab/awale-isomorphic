@@ -19,6 +19,7 @@ module.exports = {
         "react/jsx-indent": ["error", 4],
         "react/jsx-indent-props": ["error", 4],
         "import/no-extraneous-dependencies": "off",
-        "react/jsx-curly-brace-presence": "off"
+        "react/jsx-curly-brace-presence": "off",
+        "import/no-named-as-default": "off"
     }
 };

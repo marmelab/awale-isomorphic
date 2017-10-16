@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import withRedux from 'next-redux-wrapper';
 
@@ -10,62 +10,65 @@ import Board from '../src/components/board';
 import Score from '../src/components/score';
 import GameOver from '../src/components/gameOver';
 
-class Game extends Component {
-    static propTypes = {
-        game: PropTypes.shape({
-            board: PropTypes.arrayOf(PropTypes.number).isRequired,
-            score: PropTypes.arrayOf(PropTypes.number).isRequired,
-            currentIndexPlayer: PropTypes.number.isRequired,
-        }).isRequired,
-    }
+class Game extends React.PureComponent {
+  static propTypes = {
+      game: PropTypes.shape({
+          board: PropTypes.arrayOf(PropTypes.number).isRequired,
+          score: PropTypes.arrayOf(PropTypes.number).isRequired,
+          currentIndexPlayer: PropTypes.number.isRequired,
+      }).isRequired,
+  };
 
-    render() {
-        const game = this.props.game;
-        const isCurrentPlayerOne = (game.currentIndexPlayer === 0);
-        const gameContinue = game.gameState === GAME_CONTINUE;
-        const textScore = gameContinue ? 'turn' : 'score';
+  render() {
+      const game = { ...this.props.game };
+      const isCurrentPlayerOne = game.currentIndexPlayer === 0;
+      const gameContinue = game.gameState === GAME_CONTINUE;
+      const textScore = gameContinue ? 'turn' : 'score';
 
-        return (
-            <div>
-                <Header />
+      return (
+          <div>
+              <Header />
 
-                <Score
-                    score={game.score[1]}
-                    text={`Their ${textScore}`}
-                    flexDirection="row-reverse"
-                    highlight={!isCurrentPlayerOne || !gameContinue}
-                    color="#34495e"
-                />
+              <Score
+                  score={game.score[1]}
+                  text={`Their ${textScore}`}
+                  flexDirection="row-reverse"
+                  highlight={!isCurrentPlayerOne || !gameContinue}
+                  color="#34495e"
+              />
 
-                <div className="game">
-                    {gameContinue
-                        ? <Board
-                            board={game.board}
-                            currentIndexPlayer={game.currentIndexPlayer}
-                        />
-                        : <GameOver />}
-                </div>
+              <div className="game">
+                  {gameContinue ? (
+                      <Board
+                          board={game.board}
+                          currentIndexPlayer={game.currentIndexPlayer}
+                      />
+                  ) : (
+                      <GameOver />
+                  )}
+              </div>
 
-                <Score
-                    score={game.score[0]}
-                    text={`Your ${textScore}`}
-                    flexDirection="row"
-                    highlight={isCurrentPlayerOne || !gameContinue}
-                    color="#9b59b6"
-                />
+              <Score
+                  score={game.score[0]}
+                  text={`Your ${textScore}`}
+                  flexDirection="row"
+                  highlight={isCurrentPlayerOne || !gameContinue}
+                  color="#9b59b6"
+              />
 
-                <style jsx>{`
-                  .game {
-                      height: 270px;
-                      margin: 0 auto;
-                      position: relative;
-                      width: 720px
-                  }
+              <style jsx>
+                  {`
+                    .game {
+                        height: 270px;
+                        margin: 0 auto;
+                        position: relative;
+                        width: 720px;
+                    }
                 `}
-                </style>
-            </div>
-        );
-    }
+              </style>
+          </div>
+      );
+  }
 }
 
 const mapStateToProps = state => ({
