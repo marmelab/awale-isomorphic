@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Score extends Component {
     static propTypes = {
@@ -80,7 +81,8 @@ export default class Score extends Component {
                         width: 350px;
                         margin-top: 70px;
                     }
-                `}</style>
+                `}
+                </style>
             </div>
         );
     }

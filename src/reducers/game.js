@@ -13,6 +13,27 @@ import {
 import createPlayer from '../awale/player/Player';
 import { canPlayerPlayPosition } from '../awale/board/Board';
 
+
+function startGameModel(isHuman) {
+    return createGame([createPlayer(0), createPlayer(1, isHuman)]);
+}
+
+function pickPebbleGame(game, position, canPlayIA = true) {
+    if (!canPlayIA) {
+        return game;
+    }
+
+    const player = getCurrentPlayer(game);
+    const canPlay = canPlayerPlayPosition(player, game.board, position);
+    if (!canPlay) {
+        return game;
+    }
+
+    let nextGame = playTurn(game, position);
+    nextGame = checkWinner(nextGame);
+    return nextGame;
+}
+
 const initState = { game: startGameModel(true), canPlay: true };
 
 export const reducer = (state = initState, action) => {
@@ -35,31 +56,9 @@ export const initStore = (initialState) => {
     return createStore(
         reducer,
         initialState,
-        composeEnhancers(
-            applyMiddleware(
-                thunkMiddleware,
-                pickPebbleIAMiddleware,
-            ),
-        ),
+        composeEnhancers(applyMiddleware(
+            thunkMiddleware,
+            pickPebbleIAMiddleware,
+        )),
     );
 };
-
-function startGameModel(isHuman) {
-    return createGame([createPlayer(0), createPlayer(1, isHuman)]);
-}
-
-function pickPebbleGame(game, position, canPlayIA = true) {
-    if (!canPlayIA) {
-        return game;
-    }
-
-    const player = getCurrentPlayer(game);
-    const canPlay = canPlayerPlayPosition(player, game.board, position);
-    if (!canPlay) {
-        return game;
-    }
-
-    let nextGame = playTurn(game, position);
-    nextGame = checkWinner(nextGame);
-    return nextGame;
-}

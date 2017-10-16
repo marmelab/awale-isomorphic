@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import withRedux from 'next-redux-wrapper';
 
 import { initStore } from '../src/reducers/game';
@@ -12,8 +13,8 @@ import GameOver from '../src/components/gameOver';
 class Game extends Component {
     static propTypes = {
         game: PropTypes.shape({
-            board: PropTypes.arrayOf(React.PropTypes.number).isRequired,
-            score: PropTypes.arrayOf(React.PropTypes.number).isRequired,
+            board: PropTypes.arrayOf(PropTypes.number).isRequired,
+            score: PropTypes.arrayOf(PropTypes.number).isRequired,
             currentIndexPlayer: PropTypes.number.isRequired,
         }).isRequired,
     }
@@ -38,11 +39,11 @@ class Game extends Component {
 
                 <div className="game">
                     {gameContinue
-                    ? <Board
-                        board={game.board}
-                        currentIndexPlayer={game.currentIndexPlayer}
-                    />
-                    : <GameOver />}
+                        ? <Board
+                            board={game.board}
+                            currentIndexPlayer={game.currentIndexPlayer}
+                        />
+                        : <GameOver />}
                 </div>
 
                 <Score
@@ -60,7 +61,8 @@ class Game extends Component {
                       position: relative;
                       width: 720px
                   }
-                `}</style>
+                `}
+                </style>
             </div>
         );
     }

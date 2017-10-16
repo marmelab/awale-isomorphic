@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { pickPebble as pickPebbleAction } from '../actions/actions';
@@ -33,7 +34,8 @@ export class PitButton extends Component {
                       padding: 10px;
                       width: 14%;
                   }
-                `}</style>
+                `}
+                </style>
             </button>
         );
     }
