@@ -2,30 +2,25 @@
 
 exports[`Title should match with snapshot 1`] = `
 <div
-  data-jsx={3449686394}
+  className="jsx-462691946"
 >
   <nav
-    className="menu"
-    data-jsx={3449686394}
+    className="jsx-462691946 menu"
   >
     <h1
-      className="menu__h1"
-      data-jsx={3449686394}
+      className="jsx-462691946 menu__h1"
     >
       Awale
     </h1>
     <ul
-      className="menu__ul"
-      data-jsx={3449686394}
+      className="jsx-462691946 menu__ul"
     >
       <li
-        className="menu__li"
-        data-jsx={3449686394}
+        className="jsx-462691946 menu__li"
         onClick={[Function]}
       >
         <a
-          className="menu__a"
-          data-jsx={3449686394}
+          className="jsx-462691946 menu__a"
           href="/game"
           id="newGame"
           onClick={[Function]}
@@ -34,13 +29,11 @@ exports[`Title should match with snapshot 1`] = `
         </a>
       </li>
       <li
-        className="menu__li"
-        data-jsx={3449686394}
+        className="jsx-462691946 menu__li"
         onClick={[Function]}
       >
         <a
-          className="menu__a"
-          data-jsx={3449686394}
+          className="jsx-462691946 menu__a"
           href="/game"
           onClick={[Function]}
         >

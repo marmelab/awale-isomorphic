@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import withRedux from 'next-redux-wrapper';
 import Link from 'next/link';
 
@@ -62,7 +63,9 @@ export class Index extends Component {
                   .menu__a:hover{
                     color: white;
                   }
-                `}</style>
+
+                `}
+                </style>
             </div>
         );
     }

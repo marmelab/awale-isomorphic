@@ -13,6 +13,24 @@ import {
 import createPlayer from '../awale/player/Player';
 import { canPlayerPlayPosition } from '../awale/board/Board';
 
+const startGameModel = isHuman => createGame([createPlayer(0), createPlayer(1, isHuman)]);
+
+const pickPebbleGame = (game, position, canPlayIA = true) => {
+    if (!canPlayIA) {
+        return game;
+    }
+
+    const player = getCurrentPlayer(game);
+    const canPlay = canPlayerPlayPosition(player, game.board, position);
+    if (!canPlay) {
+        return game;
+    }
+
+    let nextGame = playTurn(game, position);
+    nextGame = checkWinner(nextGame);
+    return nextGame;
+};
+
 const initState = { game: startGameModel(true), canPlay: true };
 
 export const reducer = (state = initState, action) => {
@@ -31,35 +49,6 @@ export const reducer = (state = initState, action) => {
 };
 
 export const initStore = (initialState) => {
-    const composeEnhancers = global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-    return createStore(
-        reducer,
-        initialState,
-        composeEnhancers(
-            applyMiddleware(
-                thunkMiddleware,
-                pickPebbleIAMiddleware,
-            ),
-        ),
-    );
+    const composeEnhancers = global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // eslint-disable-line no-underscore-dangle
+    return createStore(reducer, initialState, composeEnhancers(applyMiddleware(thunkMiddleware, pickPebbleIAMiddleware)));
 };
-
-function startGameModel(isHuman) {
-    return createGame([createPlayer(0), createPlayer(1, isHuman)]);
-}
-
-function pickPebbleGame(game, position, canPlayIA = true) {
-    if (!canPlayIA) {
-        return game;
-    }
-
-    const player = getCurrentPlayer(game);
-    const canPlay = canPlayerPlayPosition(player, game.board, position);
-    if (!canPlay) {
-        return game;
-    }
-
-    let nextGame = playTurn(game, position);
-    nextGame = checkWinner(nextGame);
-    return nextGame;
-}

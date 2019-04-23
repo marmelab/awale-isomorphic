@@ -23,6 +23,7 @@ export default () => (
               margin:auto;
               font-family: Segoe UI,Helvetica Neue,Helvetica,Arial,sans-serif;
           }
-        `}</style>
+        `}
+        </style>
     </Head>
 );

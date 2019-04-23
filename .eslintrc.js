@@ -18,6 +18,8 @@ module.exports = {
         "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
         "react/jsx-indent": ["error", 4],
         "react/jsx-indent-props": ["error", 4],
-        "import/no-extraneous-dependencies": "off"
+        "import/no-extraneous-dependencies": "off",
+        "react/jsx-curly-brace-presence": "off",
+        "import/no-named-as-default": "off"
     }
 };
